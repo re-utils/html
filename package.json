@@ -1,7 +1,7 @@
 {
-  "name": "jsx",
+  "name": "@re-utils/html",
   "version": "0.0.1",
-  "description": "Example package",
+  "description": "HTML utils",
   "keywords": [],
   "license": "MIT",
   "type": "module",
@@ -20,9 +20,11 @@
     "eslint": "latest",
     "eslint-plugin-jsdoc": "latest",
     "mitata": "latest",
-    "typescript": "latest",
     "tsx": "latest",
+    "typescript": "latest",
     "typescript-eslint": "latest"
   },
-  "dependencies": {}
+  "optionalDependencies": {
+    "csstype": "3.1"
+  }
 }

@@ -24,6 +24,7 @@ const transpiler = new Bun.Transpiler({
 });
 
 for (const path of new Bun.Glob('**/*.ts').scanSync(SOURCEDIR)) {
+  if (path.endsWith('.d.ts')) continue;
   const srcPath = `${SOURCEDIR}/${path}`;
 
   const pathExtStart = path.lastIndexOf('.');
@@ -41,3 +42,6 @@ for (const path of new Bun.Glob('**/*.ts').scanSync(SOURCEDIR)) {
       Bun.write(`${outPathNoExt}.d.ts`, transpileDeclaration(buf, tsconfig as any).outputText);
     });
 }
+
+// Copy all declarations to lib
+for (const path of new Bun.Glob('**/*.d.ts').scanSync(SOURCEDIR)) Bun.write(`${OUTDIR}/${path}`, Bun.file(`${SOURCEDIR}/${path}`));

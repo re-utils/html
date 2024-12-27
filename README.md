@@ -1,40 +1,23 @@
-# Library template
+# A JSX renderer
 
-An NPM library template using Bun.
+Add these stuff to `tsconfig.json`:
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@re-utils/html"
+  }
+}
+```
 
-## Scripts
+Then you can write JSX in your file:
+```tsx
+const html: string = <p>Hi</p>;
+```
 
-All script sources.
+And to escape HTML strings:
+```tsx
+import { escapeHTML } from "@re-utils/html";
 
-### [Build](./scripts/build.ts)
-
-Emit `.js` and `.d.ts` files to [`lib`](./lib).
-
-### [Publish](./scripts/publish.ts)
-
-Move [`package.json`](./package.json), [`README.md`](./README.md) to [`lib`](./lib) and publish the package.
-
-### [Bench](./scripts/bench.ts)
-
-Run files that ends with `.bench.ts` extension.
-
-## Package scripts
-
-All specified scripts in [`package.json`](./package.json).
-
-```bash
-# Build and run tests
-bun build:test
-
-# Build and run benchmarks
-bun build:bench
-
-# Build and publish the package
-bun build:publish
-
-# Lint
-bun lint
-
-# Lint and fix if possible
-bun lint:fix
+const html: string = <div>{escapeHTML(htmlString)}</div>;
 ```
