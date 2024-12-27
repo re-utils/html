@@ -9,6 +9,9 @@ tagsMap[38] = '&amp;';
 tagsMap[39] = '&#39';
 tagsMap[60] = '&lt;';
 
+// This function is not inlinable
+const escapeTag = (tag: string): string => tagsMap[tag.charCodeAt(0)];
+
 /**
  * Escape HTML strings
  * @param str - The string to escape
@@ -16,7 +19,7 @@ tagsMap[60] = '&lt;';
  */
 // eslint-disable-next-line
 export const escapeHTML: (str: string) => string = globalThis.Bun?.escapeHTML ?? (
-  (str) => str.replace(/[&<'"]/g, (tag) => tagsMap[tag.charCodeAt(0)])
+  (str) => str.replace(/[&<'"]/g, escapeTag)
 );
 
 type Value = string | number | boolean | null | undefined;
